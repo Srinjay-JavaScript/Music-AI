@@ -1,0 +1,23 @@
+* {
+  font-family: "Berkshire Swash", cursive;
+}
+body {
+  background: linear-gradient(
+    90deg,
+    rgb(56, 56, 56),
+    rgb(22, 22, 22),
+    rgb(56, 56, 56)
+  );
+}
+canvas {
+  border: 5px white double;
+  border-radius: 10px;
+  margin-top: 100px;
+}
+.footer {
+  line-height: 0.8;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
