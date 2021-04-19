@@ -1,5 +1,15 @@
+//Global Variable
+var leftWristX = 0;
+var leftWristY = 0;
+var rightWristX = 0;
+var rightWristY = 0;
+
+var peter_pan = "";
+var harry_potter = "";
 
 function preload(){
+   peter_pan = loadSound("music2.mp3");
+   harry_potter = loadSound("music.mp3");
 }
    
 function setup()
@@ -8,10 +18,28 @@ function setup()
  canvas.center();
  video = createCapture(VIDEO);
  video.hide();
+ posenet = ml5.poseNet(video, initialized);
+ posenet.on("pose", gotPoses);
  
 }
 function draw()
 {
  image(video, 0, 0, 400, 400);
- 
+}
+function initialized()
+{
+    console.log("Posenet is ready to detect poses.");
+}
+function gotPoses(result)
+{
+ if (result.length > 0)
+ {
+     // Left Wrist
+     leftWristX = result[0].pose.leftWrist.x;
+     leftWristY = result[0].pose.leftWrist.y;
+    //Right Wrist
+     rightWristX = result[0].pose.rightWrist.x;
+     rightWristY = result[0].pose.rightWrist.y;
+
+ }
 }
