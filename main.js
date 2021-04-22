@@ -3,6 +3,7 @@ var leftWristX = 0;
 var leftWristY = 0;
 var rightWristX = 0;
 var rightWristY = 0;
+var ScoreLeftWrist = 0;
 
 var peter_pan = "";
 var harry_potter = "";
@@ -25,6 +26,22 @@ function setup()
 function draw()
 {
  image(video, 0, 0, 400, 400);
+ pStatus = peter_pan.isPlaying();
+ fill("red");
+ stroke("red");
+
+ if (ScoreLeftWrist > 0.2)
+ {
+     circle(leftWristX, leftWristY, 20);
+     harry_potter.stop();
+     if(pStatus == false)
+     {
+         peter_pan.play();
+         document.getElementById("song").style.display = "inline";
+         document.getElementById("song").innerHTML = "Peter Pan";
+     }
+ }
+
 }
 function initialized()
 {
@@ -40,6 +57,19 @@ function gotPoses(result)
     //Right Wrist
      rightWristX = result[0].pose.rightWrist.x;
      rightWristY = result[0].pose.rightWrist.y;
+     ScoreLeftWrist = result[0].pose.keypoints[9].score;
 
  }
+}
+function playPeter()
+{
+    peter_pan.play();
+    peter_pan.setVolume(1);
+    peter_pan.rate(1);
+}
+function playHarry()
+{
+    harry_potter.play();
+    harry_potter.setVolume(1);
+    harry_potter.rate(1);
 }
