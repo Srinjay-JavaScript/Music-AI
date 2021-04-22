@@ -61,15 +61,3 @@ function gotPoses(result)
 
  }
 }
-function playPeter()
-{
-    peter_pan.play();
-    peter_pan.setVolume(1);
-    peter_pan.rate(1);
-}
-function playHarry()
-{
-    harry_potter.play();
-    harry_potter.setVolume(1);
-    harry_potter.rate(1);
-}
