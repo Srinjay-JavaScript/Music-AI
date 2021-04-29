@@ -4,7 +4,7 @@ var leftWristY = 0;
 var rightWristX = 0;
 var rightWristY = 0;
 var ScoreLeftWrist = 0;
-
+var ScoreRightWrist = 0;
 var peter_pan = "";
 var harry_potter = "";
 
@@ -27,12 +27,13 @@ function draw()
 {
  image(video, 0, 0, 400, 400);
  pStatus = peter_pan.isPlaying();
+ hStatus = harry_potter.isPlaying();
  fill("red");
  stroke("red");
 
  if (ScoreLeftWrist > 0.2)
  {
-     circle(leftWristX, leftWristY, 20);
+     circle(leftWristX-150, leftWristY-30, 20);
      harry_potter.stop();
      if(pStatus == false)
      {
@@ -41,6 +42,18 @@ function draw()
          document.getElementById("song").innerHTML = "Peter Pan";
      }
  }
+ else if (ScoreRightWrist > 0.2)
+ {
+     circle(rightWristX-200, rightWristY-80, 20);
+     peter_pan.stop();
+     if(hStatus == false)
+     {
+         harry_potter.play();
+         document.getElementById("song").style.display = "inline";
+         document.getElementById("song").innerHTML = "Harry Potter - Mixed";
+     }
+ }
+ 
 
 }
 function initialized()
@@ -58,6 +71,7 @@ function gotPoses(result)
      rightWristX = result[0].pose.rightWrist.x;
      rightWristY = result[0].pose.rightWrist.y;
      ScoreLeftWrist = result[0].pose.keypoints[9].score;
-
+     ScoreRightWrist = result[0].pose.keypoints[10].score;
+    
  }
 }
